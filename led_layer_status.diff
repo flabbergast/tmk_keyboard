@@ -1,0 +1,53 @@
+diff --git a/keyboard/gh60/led.c b/keyboard/gh60/led.c
+index 62abcd7..554448c 100644
+--- a/keyboard/gh60/led.c
++++ b/keyboard/gh60/led.c
+@@ -19,6 +19,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ #include "stdint.h"
+ #include "led.h"
+ 
++void led_layer_set(uint32_t state) {
++    DDRD |= (1<<4);
++
++    /* Led for Layer 2 */
++    if ((1<<2 & state) != 0) {
++        PORTD |= (1<<4);
++    } else {
++        PORTD &= ~(1<<4);
++    }
++}
+ 
+ void led_set(uint8_t usb_led)
+ {
+diff --git a/tmk_core/common/action_layer.c b/tmk_core/common/action_layer.c
+index c535615..b3bc0ea 100644
+--- a/tmk_core/common/action_layer.c
++++ b/tmk_core/common/action_layer.c
+@@ -3,6 +3,7 @@
+ #include "action.h"
+ #include "util.h"
+ #include "action_layer.h"
++#include "led.h"
+ 
+ #ifdef DEBUG_ACTION
+ #include "debug.h"
+@@ -63,6 +64,7 @@ static void layer_state_set(uint32_t state)
+     layer_debug(); dprint(" to ");
+     layer_state = state;
+     layer_debug(); dprintln();
++    led_layer_set(state);
+     clear_keyboard_but_mods(); // To avoid stuck keys
+ }
+ 
+diff --git a/tmk_core/common/led.h b/tmk_core/common/led.h
+index d5fc051..e526ce5 100644
+--- a/tmk_core/common/led.h
++++ b/tmk_core/common/led.h
+@@ -33,6 +33,7 @@ extern "C" {
+ #endif
+ 
+ void led_set(uint8_t usb_led);
++void led_layer_set(uint32_t state);
+ 
+ #ifdef __cplusplus
+ }

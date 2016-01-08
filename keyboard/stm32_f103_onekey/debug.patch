@@ -1,0 +1,126 @@
+diff --git a/keyboard/stm32_f103_onekey/Makefile b/keyboard/stm32_f103_onekey/Makefile
+index 79ca423..8ee6399 100644
+--- a/keyboard/stm32_f103_onekey/Makefile
++++ b/keyboard/stm32_f103_onekey/Makefile
+@@ -20,14 +20,14 @@ endif
+ CONFIG_H = config.h
+ 
+ # GENERIC STM32F103C8T6 board - stm32duino bootloader
+-OPT_DEFS = -DCORTEX_VTOR_INIT=0x2000
+-MCU_LDSCRIPT = STM32F103x8_stm32duino_bootloader
+-BOARD = GENERIC_STM32_F103
++# OPT_DEFS = -DCORTEX_VTOR_INIT=0x2000
++# MCU_LDSCRIPT = STM32F103x8_stm32duino_bootloader
++# BOARD = GENERIC_STM32_F103
+ 
+ # GENERIC STM32F103C8T6 board - no bootloader (programmer over serial or SWD)
+-# OPT_DEFS =
+-# MCU_LDSCRIPT = STM32F103x8
+-# BOARD = GENERIC_STM32_F103
++OPT_DEFS =
++MCU_LDSCRIPT = STM32F103x8
++BOARD = GENERIC_STM32_F103
+ 
+ # MAPLE MINI
+ # OPT_DEFS = -DCORTEX_VTOR_INIT=0x5000
+@@ -70,7 +70,7 @@ ARMV = 7
+ ## BOOTMAGIC is not supported on STM32 chips yet.
+ MOUSEKEY_ENABLE = yes	# Mouse keys
+ EXTRAKEY_ENABLE = yes	# Audio control and System control
+-# CONSOLE_ENABLE = yes	# Console for debug
++CONSOLE_ENABLE = yes	# Console for debug
+ COMMAND_ENABLE = yes    # Commands for debug and configuration
+ SLEEP_LED_ENABLE = no   # Breathing sleep LED during USB suspend
+ NKRO_ENABLE = yes	    # USB Nkey Rollover
+diff --git a/keyboard/stm32_f103_onekey/chconf.h b/keyboard/stm32_f103_onekey/chconf.h
+index acce6a1..45331b6 100644
+--- a/keyboard/stm32_f103_onekey/chconf.h
++++ b/keyboard/stm32_f103_onekey/chconf.h
+@@ -338,7 +338,7 @@
+  *
+  * @note    The default is @p FALSE.
+  */
+-#define CH_DBG_SYSTEM_STATE_CHECK           FALSE
++#define CH_DBG_SYSTEM_STATE_CHECK           TRUE
+ 
+ /**
+  * @brief   Debug option, parameters checks.
+@@ -347,7 +347,7 @@
+  *
+  * @note    The default is @p FALSE.
+  */
+-#define CH_DBG_ENABLE_CHECKS                FALSE
++#define CH_DBG_ENABLE_CHECKS                TRUE
+ 
+ /**
+  * @brief   Debug option, consistency checks.
+@@ -357,7 +357,7 @@
+  *
+  * @note    The default is @p FALSE.
+  */
+-#define CH_DBG_ENABLE_ASSERTS               FALSE
++#define CH_DBG_ENABLE_ASSERTS               TRUE
+ 
+ /**
+  * @brief   Debug option, trace buffer.
+@@ -366,7 +366,7 @@
+  *
+  * @note    The default is @p FALSE.
+  */
+-#define CH_DBG_ENABLE_TRACE                 FALSE
++#define CH_DBG_ENABLE_TRACE                 TRUE
+ 
+ /**
+  * @brief   Debug option, stack checks.
+@@ -378,7 +378,7 @@
+  * @note    The default failure mode is to halt the system with the global
+  *          @p panic_msg variable set to @p NULL.
+  */
+-#define CH_DBG_ENABLE_STACK_CHECK           FALSE
++#define CH_DBG_ENABLE_STACK_CHECK           TRUE
+ 
+ /**
+  * @brief   Debug option, stacks initialization.
+@@ -388,7 +388,7 @@
+  *
+  * @note    The default is @p FALSE.
+  */
+-#define CH_DBG_FILL_THREADS                 FALSE
++#define CH_DBG_FILL_THREADS                 TRUE
+ 
+ /**
+  * @brief   Debug option, threads profiling.
+diff --git a/keyboard/stm32_f103_onekey/keymap_plain.c b/keyboard/stm32_f103_onekey/keymap_plain.c
+index 8de1c02..5ac1c56 100644
+--- a/keyboard/stm32_f103_onekey/keymap_plain.c
++++ b/keyboard/stm32_f103_onekey/keymap_plain.c
+@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ #include "keymap.h"
+ 
+ static const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+-    {{KC_CAPS}}, // test with KC_CAPS, KC_A, KC_BTLD
++    {{KC_A}}, // test with KC_CAPS, KC_A, KC_BTLD
+ };
+ 
+ static const uint16_t fn_actions[] = {
+diff --git a/keyboard/stm32_f103_onekey/matrix.c b/keyboard/stm32_f103_onekey/matrix.c
+index ea9d8d0..55a5b09 100644
+--- a/keyboard/stm32_f103_onekey/matrix.c
++++ b/keyboard/stm32_f103_onekey/matrix.c
+@@ -146,14 +146,14 @@ static void  init_cols(void)
+     // don't need pullup/down, since it's pulled down in hardware
+     palSetPadMode(GPIOB, 8, PAL_MODE_INPUT);
+ #else
+-    palSetPadMode(GPIOB, 8, PAL_MODE_INPUT_PULLDOWN);
++    palSetPadMode(GPIOB, 9, PAL_MODE_INPUT_PULLDOWN);
+ #endif
+ }
+ 
+ /* Returns status of switches(1:on, 0:off) */
+ static matrix_row_t read_cols(void)
+ {
+-    return ((palReadPad(GPIOB, 8)==PAL_LOW) ? 0 : (1<<0));
++    return ((palReadPad(GPIOB, 9)==PAL_LOW) ? 0 : (1<<0));
+     // | ((palReadPad(...)==PAL_HIGH) ? 0 : (1<<1))
+ }
+ 
