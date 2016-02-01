@@ -44,7 +44,7 @@ const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
      */
     [2] = KEYMAP_AEK( \
         GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, GRV, \
-        CAPS,FN1,BTLD,WAKE, NO,  NO,  NO,  NO,  PSCR,SLCK,PAUS,UP,  INS, DEL, \
+        CAPS,FN1,BTLD,WAKE,SLEP, NO,  NO,  NO,  PSCR,SLCK,PAUS,UP,  INS, DEL, \
         LCTL,VOLD,VOLU,MUTE,EJCT,NO,  PAST,PSLS,HOME,PGUP,LEFT,RGHT,PENT, \
         LSFT,NO,  NO,  NO,  NO,  NO,  PPLS,PMNS,END, PGDN,DOWN,RSFT, \
         LCTL,LALT,LGUI,          TRNS,                         RGUI,RALT,TRNS),
