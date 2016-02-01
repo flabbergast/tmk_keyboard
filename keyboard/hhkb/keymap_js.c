@@ -36,7 +36,7 @@ const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
      * ,-----------------------------------------------------------.
      * |Pwr| F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12|Ins|Del|
      * |-----------------------------------------------------------|
-     * |Caps |   |WAK|   |   |   |   |   |Psc|Slk|Pus|Up |   |Backs|
+     * |Caps |   |WAK|SLP|   |FN1|   |   |Psc|Slk|Pus|Up |   |Backs|
      * |-----------------------------------------------------------|
      * |      |VoD|VoU|Mut|   |   |  *|  /|Hom|PgU|Lef|Rig|Enter   |
      * |-----------------------------------------------------------|
@@ -46,7 +46,7 @@ const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
      *       `-------------------------------------------'
      */
     KEYMAP(POWER,F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, INS, DEL,   \
-           CAPS,TRNS,WAKE,TRNS,TRNS,FN1, TRNS,TRNS,PSCR,SLCK,PAUS, UP, TRNS,BSPC,       \
+           CAPS,TRNS,WAKE,SLEP,TRNS,FN1, TRNS,TRNS,PSCR,SLCK,PAUS, UP, TRNS,BSPC,       \
            TRNS,VOLD,VOLU,MUTE,TRNS,TRNS,PAST,PSLS,HOME,PGUP,LEFT,RGHT,PENT,            \
            TRNS,TRNS,TRNS,TRNS,TRNS,BTLD,PPLS,PMNS,END, PGDN,DOWN,TRNS,TRNS,            \
                 TRNS,TRNS,          TRNS,               TRNS,TRNS),
@@ -66,7 +66,7 @@ const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
      * Mc: Mouse Cursor / Mb: Mouse Button / Mw: Mouse Wheel
      */
     KEYMAP(GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, INS, DEL, \
-           FN8, NO,  NO,  NO,  NO,  NO,  WH_L,WH_D,MS_U,WH_U,WH_R,FN3, FN4, NO, \
+           TAB, NO,  NO,  NO,  NO,  NO,  WH_L,WH_D,MS_U,WH_U,WH_R,FN3, FN4, NO, \
            LCTL,ACL0,ACL1,ACL2,ACL2,NO,  BTN3,MS_L,MS_D,MS_R,FN2, NO,  ENT, \
            LSFT,NO,  NO,  NO,  NO,  BTN3,BTN2,BTN1,FN3, FN4, NO,  RSFT,TRNS, \
                 LGUI,LALT,          BTN1,               TRNS,TRNS),
