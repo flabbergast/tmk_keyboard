@@ -46,7 +46,7 @@ const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
         GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, GRV, \
         CAPS,NO,  WAKE,SLEP, NO, FN1, NO,  NO,  PSCR,SLCK,PAUS,UP,  INS, DEL, \
         LCTL,VOLD,VOLU,MUTE,EJCT,NO,  PAST,PSLS,HOME,PGUP,LEFT,RGHT,PENT, \
-        LSFT,NO,  NO,  NO,  NO,  BTLD,PPLS,PMNS,END, PGDN,DOWN,RSFT, \
+        LSFT,FN5, FN6, NO,  NO,  BTLD,PPLS,PMNS,END, PGDN,DOWN,RSFT, \
         LCTL,LALT,LGUI,          TRNS,                         RGUI,RALT,TRNS),
 
     /* Layer 3: mouse keys(IJKL) - semicolon activated
@@ -72,11 +72,44 @@ const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
 
 };
 
+/*
+ * Macro definition
+ */
+enum macro_id {
+    PW1,
+    PW2,
+};
+
+#include "pw.c"
+
+#if !defined(PASSONE)
+#define PASSONE MACRO_NONE
+#endif
+#if !defined(PASSTWO)
+#define PASSTWO MACRO_NONE
+#endif
+
+const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
+    switch (id) {
+        case PW1:
+            return(record->event.pressed ?
+                    PASSONE :
+                    MACRO_NONE );
+        case PW2:
+            return(record->event.pressed ?
+                    PASSTWO :
+                    MACRO_NONE );
+    }
+    return MACRO_NONE;
+}
+
+
 const uint16_t fn_actions[] PROGMEM = {
     [0] = ACTION_LAYER_MOMENTARY(2),
     [1] = ACTION_LAYER_TOGGLE(1),
     [2] = ACTION_LAYER_TAP_KEY(3, KC_SCLN),
     [3] = ACTION_MODS_KEY(MOD_LGUI, KC_LEFT),
     [4] = ACTION_MODS_KEY(MOD_LGUI, KC_RIGHT),
-
+    [5] = ACTION_MACRO(PW1),
+    [6] = ACTION_MACRO(PW2),
 };
