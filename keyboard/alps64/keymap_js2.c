@@ -49,25 +49,25 @@ const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
         LSFT,FN5, FN6, NO,  NO,  BTLD,PPLS,PMNS,END, PGDN,DOWN,RSFT, \
         LCTL,LALT,LGUI,          TRNS,                         RGUI,RALT,TRNS),
 
-    /* Layer 3: mouse keys(IJKL) - semicolon activated
+    /* Layer 3: mouse and arrow keys(IJKL) - semicolon activated
      * ,-----------------------------------------------------------.
-     * |Esc| F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12|Ins|Del|
+     * |Esc| F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12|  Del  |
      * |-----------------------------------------------------------|
-     * |Tab  |   |   |   |   |   |MwL|MwD|McU|MwU|MwR|Wbk|Wfr|     |
+     * |Tab  |MwL|MwD|McU|MwU|MwR|   |   |PgU|Up |PgD|   |   |     |
      * |-----------------------------------------------------------|
-     * |Contro|   |   |   |   |   |Mb3|McL|McD|McR|Fn |   |Return  |
+     * |Contro|Mb3|McL|McD|McR|   |   |Lft|Dow|Rgt|Fn2|   |Return  |
      * |-----------------------------------------------------------|
-     * |Shift   |   |   |   |   |Mb3|Mb2|Mb1|Mb4|Mb5|   |Shift |   |
+     * |Shift   |Mb3|Mb2|Mb1|Mb4|Mb5|   |   |Fn3|Fn4|   |Shift     |
      * `-----------------------------------------------------------'
-     *      |Gui |Alt  |          Mb1          |Fn   |Fn |
+     *      |Gui |Alt  |          Mb1          |     |   |
      *      `--------------------------------------------'
      * Mc: Mouse Cursor / Mb: Mouse Button / Mw: Mouse Wheel
      */
     KEYMAP_AEK( \
            GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, DEL, \
-           TAB, NO,  NO,  NO,  NO,  NO,  WH_L,WH_D,MS_U,WH_U,WH_R,FN3, FN4, NO, \
-           LCTL,ACL0,ACL1,ACL2,ACL2,NO,  BTN3,MS_L,MS_D,MS_R,FN2, NO,  ENT, \
-           LSFT,NO,  NO,  NO,  NO,  BTN3,BTN2,BTN1,FN3, FN4, NO,  RSFT, \
+           TAB, WH_L,WH_D,MS_U,WH_U,WH_R,NO,  PGUP,UP,  PGDN,NO,  NO,  NO,  NO, \
+           LCTL,BTN3,MS_L,MS_D,MS_R,NO,  NO,  LEFT,DOWN,RGHT,FN2, NO,  ENT, \
+           LSFT,BTN3,BTN2,BTN1,BTN4,BTN5,  NO,  NO,  FN3, FN4, NO,  RSFT, \
            LCTL,LGUI,LALT,          BTN1,               TRNS,TRNS,TRNS),
 
 };
