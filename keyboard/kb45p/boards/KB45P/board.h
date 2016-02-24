@@ -24,7 +24,7 @@
 #define _BOARD_H_
 
 /*
- * Setup for a small custom STM32F042FxP6 breakout board.
+ * Setup for the kb45p keyboard PCB.
  */
 
 /*
