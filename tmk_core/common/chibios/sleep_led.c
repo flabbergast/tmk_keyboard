@@ -11,18 +11,19 @@
 
 #if defined(KL2x) || defined(K20x)
 
-/* Low Power Timer interrupt handler */
+/* Use Low Power Timer (LPTMR) */
 #define TIMER_INTERRUPT_VECTOR KINETIS_LPTMR0_IRQ_VECTOR
 #define RESET_COUNTER LPTMR0->CSR |= LPTMRx_CSR_TCF
 
-#elif defined(STM32F0xx)
+#elif defined(STM32F0XX)
 
+/* Use TIM14 manually */
 #define TIMER_INTERRUPT_VECTOR STM32_TIM14_HANDLER
 #define RESET_COUNTER STM32_TIM14->SR &= ~STM32_TIM_SR_UIF
 
 #endif
 
-#if defined(KL2x) || defined(K20x) || defined(STM32F0xx) /* common parts for timers/interrupts */
+#if defined(KL2x) || defined(K20x) || defined(STM32F0XX) /* common parts for timers/interrupts */
 
 /* Breathing Sleep LED brighness(PWM On period) table
  * (64[steps] * 4[duration]) / 64[PWM periods/s] = 4 second breath cycle
@@ -164,7 +165,7 @@ void sleep_led_toggle(void) {
     LPTMR0->CSR ^= LPTMRx_CSR_TEN;
 }
 
-#elif defined(STM32F0xx) /* platform selection: STM32F0xx */
+#elif defined(STM32F0XX) /* platform selection: STM32F0XX */
 
 /* Initialise the timer */
 void sleep_led_init(void) {
