@@ -36,6 +36,15 @@
 #endif
 #include "suspend.h"
 
+/* ----------------------------
+ *     User init function
+ * (Can be used to run an extra
+ *  thread; see examples)
+ * ----------------------------
+ */
+
+void user_init(void) __attribute__((weak));
+void user_init(void) {}
 
 /* -------------------------
  *   TMK host driver defs
@@ -58,29 +67,6 @@ host_driver_t chibios_driver = {
   send_consumer
 };
 
-
-/* TESTING
- * Amber LED blinker thread, times are in milliseconds.
- */
-/* set this variable to non-zero anywhere to blink once */
-// uint8_t blinkLed = 0;
-// static THD_WORKING_AREA(waBlinkerThread, 128);
-// static THD_FUNCTION(blinkerThread, arg) {
-//   (void)arg;
-//   chRegSetThreadName("blinkOrange");
-//   while(true) {
-//     if(blinkLed) {
-//       blinkLed = 0;
-//       palSetPad(TEENSY_PIN13_IOPORT, TEENSY_PIN13);
-//       chThdSleepMilliseconds(100);
-//       palClearPad(TEENSY_PIN13_IOPORT, TEENSY_PIN13);
-//     }
-//     chThdSleepMilliseconds(100);
-//   }
-// }
-
-
-
 /* Main thread
  */
 int main(void) {
@@ -88,14 +74,14 @@ int main(void) {
   halInit();
   chSysInit();
 
-  // TESTING
-  // chThdCreateStatic(waBlinkerThread, sizeof(waBlinkerThread), NORMALPRIO, blinkerThread, NULL);
-
   /* Init USB */
   init_usb_driver(&USB_DRIVER);
 
   /* init printf */
   init_printf(NULL,sendchar_pf);
+
+  /* user init */
+  user_init();
 
   /* Wait until the USB is active */
   while(USB_DRIVER.state != USB_ACTIVE)
