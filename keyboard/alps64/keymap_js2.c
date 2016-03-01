@@ -103,6 +103,9 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
     return MACRO_NONE;
 }
 
+/*
+ * Fn action definition
+ */
 
 const uint16_t fn_actions[] PROGMEM = {
     [0] = ACTION_LAYER_MOMENTARY(2),
