@@ -22,7 +22,7 @@
  */
 MEMORY
 {
-  flash0   :  org = 0x00000000,  len = 0xc0
+  flash0   :  org = 0x00000000,  len = 0x100
   flashcfg :  org = 0x00000400,  len = 0x10
   flash    :  org = 0x00000410,  len = 62k - 0x410
   eeprom_emu : org = 0x0000F800, len = 2k
